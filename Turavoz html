@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TURAVOZ — Marketplace</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f7f7f7;color:#111;padding-bottom:76px}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #eee}
+.top{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.logo{font-size:30px;font-weight:900;letter-spacing:-1px}
+.logo span{color:#c89b3c}
+.icon{font-size:27px;background:none;border:0;cursor:pointer}
+.actions{display:flex;gap:15px;align-items:center}
+.cart{position:relative}
+.badge{position:absolute;right:-7px;top:-7px;background:#b88928;color:#fff;border-radius:50%;font-size:11px;min-width:18px;height:18px;text-align:center;padding-top:3px}
+.hero{margin:14px;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#111,#3d311d);color:#fff;padding:38px 24px;min-height:300px;display:flex;align-items:center}
+.hero h1{font-size:42px;line-height:1.02;margin-bottom:12px}
+.hero p{color:#ddd;font-size:16px;margin-bottom:22px;max-width:290px}
+.btn{border:0;border-radius:12px;padding:13px 20px;font-weight:800;cursor:pointer}
+.gold{background:#c89b3c;color:#111}
+.dark{background:#111;color:#fff}
+section{padding:18px 16px}
+.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.title h2{font-size:21px}
+.scroll{display:flex;gap:12px;overflow:auto;padding-bottom:4px}
+.card{min-width:145px;background:#fff;border-radius:16px;padding:15px;box-shadow:0 4px 18px #0000000d}
+.product-img{height:110px;border-radius:12px;background:linear-gradient(135deg,#eee,#ddd);display:flex;align-items:center;justify-content:center;font-size:42px;margin-bottom:10px}
+.card b{font-size:14px}
+.price{margin-top:6px;font-weight:900;color:#a37720}
+.seller-box{background:#111;color:#fff;border-radius:20px;padding:22px}
+.seller-box p{color:#ccc;margin:8px 0 18px;line-height:1.5}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid #ddd;z-index:30;display:flex;justify-content:space-around;align-items:center}
+.navbtn{border:0;background:none;font-size:11px;font-weight:700;color:#555;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.navbtn span{font-size:23px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:50;align-items:flex-end}
+.modal.show{display:flex}
+.sheet{background:#fff;width:100%;border-radius:24px 24px 0 0;padding:22px;max-height:88vh;overflow:auto}
+.sheet h2{margin-bottom:16px}
+.close{float:right;border:0;background:#eee;border-radius:50%;width:34px;height:34px;font-size:20px}
+input{width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;margin:7px 0 11px;font-size:15px}
+.form-btn{width:100%;margin-top:7px}
+.switch{margin-top:14px;text-align:center;color:#666;font-size:14px}
+.link{color:#a37720;font-weight:800;cursor:pointer}
+.notice{padding:12px;border-radius:12px;background:#f4ead4;margin:12px 0;font-size:13px}
+.shop{border:1px solid #eee;border-radius:15px;padding:15px;background:#fff;margin-bottom:10px}
+.empty{color:#777;text-align:center;padding:25px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <button class="icon" onclick="openMenu()">☰</button>
+    <div class="logo">TURA<span>VOZ</span></div>
+    <div class="actions">
+      <button class="icon cart" onclick="openCart()">🛒<i class="badge" id="cartCount">0</i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div>
+      <h1>Shop Smart.<br>Shop TURAVOZ.</h1>
+      <p>Discover products from independent sellers and professional shops.</p>
+      <button class="btn gold" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="title"><h2>Categories</h2></div>
+    <div class="scroll">
+      <div class="card" onclick="filter('Fashion')">👕<br><b>Fashion</b></div>
+      <div class="card" onclick="filter('Electronics')">📱<br><b>Electronics</b></div>
+      <div class="card" onclick="filter('Home')">🏠<br><b>Home</b></div>
+      <div class="card" onclick="filter('Beauty')">✨<br><b>Beauty</b></div>
+      <div class="card" onclick="filter('Kids')">🧸<br><b>Kids</b></div>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="title"><h2>Featured Products</h2></div>
+    <div class="scroll" id="productList"></div>
+  </section>
+
+  <section>
+    <div class="seller-box">
+      <h2>Sell on TURAVOZ</h2>
+      <p>Create your professional shop, add products and manage your orders from your seller area.</p>
+      <button class="btn gold" onclick="openSeller()">Seller Login / Create Account</button>
+    </div>
+  </section>
+
+  <section id="shops">
+    <div class="title"><h2>Professional Shops</h2></div>
+    <div class="shop"><b>Coming Soon</b><p style="color:#777;margin-top:5px">Seller shops will appear here.</p></div>
+  </section>
+</main>
+
+<nav class="bottom">
+  <button class="navbtn" onclick="scrollTopPage()"><span>⌂</span>Home</button>
+  <button class="navbtn" onclick="document.getElementById('shops').scrollIntoView({behavior:'smooth'})"><span>▣</span>Shops</button>
+  <button class="navbtn" onclick="openCart()"><span>🛒</span>Cart</button>
+  <button class="navbtn" onclick="searchProducts()"><span>⌕</span>Search</button>
+  <button class="navbtn" onclick="openSeller()"><span>♙</span>Seller</button>
+</nav>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+const products=[
+ {name:"Premium Watch",cat:"Fashion",icon:"⌚",price:"Rs. 2,999"},
+ {name:"Wireless Earbuds",cat:"Electronics",icon:"🎧",price:"Rs. 3,499"},
+ {name:"Home Lamp",cat:"Home",icon:"💡",price:"Rs. 1,799"},
+ {name:"Beauty Set",cat:"Beauty",icon:"💄",price:"Rs. 2,199"},
+ {name:"Kids Toy",cat:"Kids",icon:"🧸",price:"Rs. 1,299"}
+];
+let cart=JSON.parse(localStorage.getItem("turavoz_cart")||"[]");
+
+function renderProducts(list=products){
+ const el=document.getElementById("productList");
+ el.innerHTML=list.map((p,i)=>`<div class="card">
+ <div class="product-img">${p.icon}</div><b>${p.name}</b><div style="font-size:12px;color:#777;margin-top:4px">${p.cat}</div>
+ <div class="price">${p.price}</div><button class="btn dark" style="width:100%;margin-top:10px;padding:9px" onclick="addCart(${i})">Add to Cart</button>
+ </div>`).join("");
+}
+function addCart(i){cart.push(products[i]);localStorage.setItem("turavoz_cart",JSON.stringify(cart));updateCart();alert("Added to cart");}
+function updateCart(){document.getElementById("cartCount").textContent=cart.length}
+function openCart(){
+ show(`<button class="close" onclick="closeModal()">×</button><h2>Your Cart</h2>
+ ${cart.length?cart.map(x=>`<div class="shop"><b>${x.name}</b><div class="price">${x.price}</div></div>`).join(""):`<div class="empty">Your cart is empty.</div>`}
+ ${cart.length?`<button class="btn gold form-btn" onclick="alert('Checkout will be connected to the payment/delivery system later.')">Proceed to Checkout</button>`:""}`);
+}
+function openSeller(){show(`<button class="close" onclick="closeModal()">×</button><div id="sellerContent"></div>`);sellerLogin();}
+function sellerLogin(){
+document.getElementById("sellerContent").innerHTML=`<h2>Seller Login</h2>
+<div class="notice">Buyer login is not required. This login is only for sellers.</div>
+<input id="loginEmail" type="email" placeholder="Seller email">
+<input id="loginPass" type="password" placeholder="Password">
+<button class="btn gold form-btn" onclick="sellerLoginAction()">Login</button>
+<div class="switch">New seller? <span class="link" onclick="sellerRegister()">Create Seller Account</span></div>`;
+}
+function sellerRegister(){
+document.getElementById("sellerContent").innerHTML=`<h2>Create Seller Account</h2>
+<input id="regName" placeholder="Shop / Seller Name">
+<input id="regEmail" type="email" placeholder="Email">
+<input id="regPass" type="password" placeholder="Password">
+<button class="btn gold form-btn" onclick="sellerRegisterAction()">Create Account</button>
+<div class="switch">Already registered? <span class="link" onclick="sellerLogin()">Login</span></div>`;
+}
+function sellerRegisterAction(){
+const n=document.getElementById("regName").value.trim(),e=document.getElementById("regEmail").value.trim(),p=document.getElementById("regPass").value;
+if(!n||!e||!p)return alert("Please fill all fields.");
+localStorage.setItem("turavoz_seller",JSON.stringify({name:n,email:e,password:p}));
+alert("Seller account created on this device. Now login.");
+sellerLogin();
+}
+function sellerLoginAction(){
+const s=JSON.parse(localStorage.getItem("turavoz_seller")||"null"),e=document.getElementById("loginEmail").value.trim(),p=document.getElementById("loginPass").value;
+if(!s)return alert("No seller account found. Please create an account first.");
+if(e===s.email&&p===s.password){sellerDashboard(s)}else alert("Email or password is incorrect.");
+}
+function sellerDashboard(s){
+document.getElementById("sellerContent").innerHTML=`<h2>Seller Dashboard</h2>
+<div class="notice">Welcome, <b>${escapeHtml(s.name)}</b>. Your professional shop area is ready.</div>
+<button class="btn dark form-btn" onclick="alert('Product manager will be connected next.')">＋ Add Product</button>
+<button class="btn gold form-btn" onclick="alert('Shop settings will be connected next.')">Shop Settings</button>
+<button class="btn" style="width:100%;margin-top:10px" onclick="localStorage.removeItem('turavoz_seller');sellerLogin()">Logout</button>`;
+}
+function escapeHtml(x){return x.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+function show(content){document.getElementById("sheet").innerHTML=content;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function filter(cat){renderProducts(products.filter(p=>p.cat===cat));document.getElementById("products").scrollIntoView({behavior:"smooth"});}
+function searchProducts(){let q=prompt("Search products");if(q)renderProducts(products.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.cat.toLowerCase().includes(q.toLowerCase())));}
+function openMenu(){show(`<button class="close" onclick="closeModal()">×</button><h2>Menu</h2><button class="btn dark form-btn" onclick="closeModal();document.getElementById('products').scrollIntoView({behavior:'smooth'})">Products</button><button class="btn dark form-btn" onclick="closeModal();document.getElementById('shops').scrollIntoView({behavior:'smooth'})">Shops</button><button class="btn gold form-btn" onclick="openSeller()">Seller Login</button>`)}
+function scrollTopPage(){window.scrollTo({top:0,behavior:"smooth"})}
+renderProducts();updateCart();
+</script>
+</body>
+</html>
