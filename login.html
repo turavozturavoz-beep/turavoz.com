@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TURAVOZ | Login</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:#080808;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-box{
+  width:100%;
+  max-width:430px;
+  background:#141414;
+  border:1px solid #292929;
+  border-radius:22px;
+  padding:32px 25px;
+  box-shadow:0 15px 50px rgba(0,0,0,.5);
+}
+
+.logo{
+  text-align:center;
+  color:#d4af37;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:3px;
+  margin-bottom:8px;
+}
+
+.tagline{
+  text-align:center;
+  color:#999;
+  margin-bottom:28px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:22px;
+  font-size:25px;
+}
+
+label{
+  display:block;
+  margin:15px 0 7px;
+  color:#ddd;
+  font-size:14px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  background:#0d0d0d;
+  color:#fff;
+  border:1px solid #3a3a3a;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
+}
+
+input:focus{
+  border-color:#d4af37;
+}
+
+.password-box{
+  position:relative;
+}
+
+.password-box input{
+  padding-right:65px;
+}
+
+.show{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  color:#d4af37;
+  cursor:pointer;
+}
+
+.forgot{
+  display:block;
+  text-align:right;
+  margin:10px 0 20px;
+  color:#d4af37;
+  text-decoration:none;
+  font-size:13px;
+}
+
+.login-btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#d4af37;
+  color:#000;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.login-btn:hover{
+  opacity:.9;
+}
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#777;
+  margin:24px 0;
+  font-size:13px;
+}
+
+.divider:before,
+.divider:after{
+  content:"";
+  height:1px;
+  background:#333;
+  flex:1;
+}
+
+.signup{
+  text-align:center;
+  color:#999;
+  font-size:14px;
+}
+
+.signup a{
+  color:#d4af37;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.home{
+  display:block;
+  text-align:center;
+  margin-top:20px;
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.message{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:9px;
+  text-align:center;
+  background:#182016;
+  color:#b9e6a9;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <div class="logo">TURAVOZ</div>
+  <div class="tagline">Pakistan's Online Marketplace</div>
+
+  <h1>Welcome Back 👋</h1>
+
+  <form onsubmit="loginUser(event)">
+
+    <label>Email or Mobile Number</label>
+    <input
+      type="text"
+      id="user"
+      placeholder="Enter email or mobile"
+      required
+    >
+
+    <label>Password</label>
+
+    <div class="password-box">
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+        required
+      >
+
+      <button
+        type="button"
+        class="show"
+        onclick="showPassword()"
+      >Show</button>
+    </div>
+
+    <a href="#" class="forgot"
+       onclick="forgotPassword(event)">
+       Forgot Password?
+    </a>
+
+    <button type="submit" class="login-btn">
+      Login to TURAVOZ
+    </button>
+
+    <div class="message" id="message"></div>
+
+  </form>
+
+  <div class="divider">OR</div>
+
+  <div class="signup">
+    Don't have an account?
+    <a href="account.html">Create Account</a>
+  </div>
+
+  <a href="index.html" class="home">
+    ← Back to TURAVOZ Home
+  </a>
+
+</div>
+
+<script>
+
+function showPassword(){
+
+  const password =
+    document.getElementById("password");
+
+  const button =
+    document.querySelector(".show");
+
+  if(password.type === "password"){
+    password.type = "text";
+    button.innerText = "Hide";
+  }else{
+    password.type = "password";
+    button.innerText = "Show";
+  }
+}
+
+function loginUser(event){
+
+  event.preventDefault();
+
+  const message =
+    document.getElementById("message");
+
+  message.style.display = "block";
+
+  message.innerText =
+    "Login system ready. Your account will be connected when the backend is added.";
+
+}
+
+function forgotPassword(event){
+
+  event.preventDefault();
+
+  const message =
+    document.getElementById("message");
+
+  message.style.display = "block";
+
+  message.innerText =
+    "Password recovery will be connected with OTP.";
+
+}
+
+</script>
+
+</body>
+</html>
