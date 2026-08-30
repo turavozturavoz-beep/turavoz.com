@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TURAVOZ Seller Login</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#090909;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+
+.wrap{
+  max-width:430px;
+  margin:auto;
+  padding:35px 20px;
+}
+
+.logo{
+  text-align:center;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.logo span{
+  color:#ddb43f;
+}
+
+.card{
+  margin-top:35px;
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:22px;
+  padding:25px;
+}
+
+h1{
+  margin:0 0 8px;
+  text-align:center;
+}
+
+.sub{
+  text-align:center;
+  color:#aaa;
+  margin-bottom:25px;
+}
+
+label{
+  display:block;
+  color:#bbb;
+  margin:15px 0 7px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:11px;
+  border:1px solid #383838;
+  background:#0c0c0c;
+  color:#fff;
+  font-size:15px;
+}
+
+button{
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border:0;
+  border-radius:11px;
+  background:#ddb43f;
+  color:#111;
+  font-weight:800;
+  font-size:16px;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  margin-top:18px;
+  color:#aaa;
+  text-decoration:none;
+}
+
+.msg{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  background:#252525;
+  color:#ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="logo">
+    <span>TURA</span>VOZ
+  </div>
+
+  <div class="card">
+
+    <h1>🏪 Seller Login</h1>
+
+    <p class="sub">
+      Login to manage your TURAVOZ shop.
+    </p>
+
+    <form onsubmit="login(event)">
+
+      <label>Email</label>
+
+      <input
+        id="email"
+        type="email"
+        required
+        placeholder="seller@example.com"
+      >
+
+      <label>Password</label>
+
+      <input
+        id="password"
+        type="password"
+        required
+        placeholder="Password"
+      >
+
+      <button type="submit">
+        Seller Login
+      </button>
+
+    </form>
+
+    <div id="msg" class="msg"></div>
+
+    <a class="back" href="index.html">
+      ← Back to TURAVOZ
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+
+function login(event){
+
+  event.preventDefault();
+
+  const msg = document.getElementById("msg");
+
+  msg.style.display = "block";
+
+  msg.textContent =
+    "Seller login is ready. Secure seller authentication will be connected next.";
+
+}
+
+</script>
+
+</body>
+</html>
