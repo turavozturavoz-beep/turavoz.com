@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09090b">
+<title>TURAVOZ — Shops</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#f5f5f6;color:#111}
+a{text-decoration:none;color:inherit}
+button{border:0;cursor:pointer}
+
+header{
+background:#09090b;color:#fff;
+position:sticky;top:0;z-index:1000;
+box-shadow:0 4px 20px #0002
+}
+
+.top{
+max-width:1200px;margin:auto;padding:16px 20px;
+display:flex;align-items:center;justify-content:space-between;
+gap:20px
+}
+
+.logo{
+font-size:27px;font-weight:900;letter-spacing:2px;
+color:#d7ad45
+}
+.logo span{color:#fff}
+
+.search{
+flex:1;max-width:600px
+}
+.search input{
+width:100%;padding:13px 18px;border-radius:30px;
+border:1px solid #333;background:#18181b;
+color:white;outline:none
+}
+
+.account{
+background:#18181b;color:#fff;border:1px solid #333;
+padding:11px 15px;border-radius:12px
+}
+
+.nav{
+max-width:1200px;margin:auto;padding:0 20px 13px;
+display:flex;gap:8px;overflow-x:auto
+}
+.nav a{
+color:#ccc;padding:8px 13px;border-radius:8px;
+white-space:nowrap
+}
+.nav a:hover{background:#222;color:#d7ad45}
+
+.container{
+max-width:1200px;margin:auto;padding:30px 20px
+}
+
+.hero{
+background:linear-gradient(135deg,#0b0b0d,#29292b);
+border-radius:24px;padding:40px;color:white;
+margin-bottom:30px;
+position:relative;overflow:hidden
+}
+.hero:after{
+content:"";
+position:absolute;width:250px;height:250px;
+right:-80px;top:-80px;border-radius:50%;
+background:#d7ad4533
+}
+.hero small{
+color:#d7ad45;font-weight:bold;letter-spacing:2px
+}
+.hero h1{
+font-size:clamp(34px,6vw,55px);margin:12px 0
+}
+.hero p{color:#bbb;line-height:1.7;max-width:650px}
+
+.filters{
+display:flex;gap:10px;overflow-x:auto;
+margin-bottom:25px
+}
+.filter{
+padding:10px 17px;border-radius:25px;
+background:white;border:1px solid #ddd;
+white-space:nowrap
+}
+.filter.active{
+background:#111;color:#d7ad45;border-color:#111
+}
+
+.title{
+display:flex;align-items:center;
+justify-content:space-between;margin-bottom:18px
+}
+.title h2{font-size:25px}
+.title span{color:#777;font-size:13px}
+
+.shops{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px
+}
+
+.shop{
+background:white;border-radius:20px;
+padding:20px;
+box-shadow:0 5px 18px #0000000d;
+transition:.25s
+}
+.shop:hover{
+transform:translateY(-5px);
+box-shadow:0 12px 30px #00000018
+}
+
+.shop-top{
+display:flex;gap:15px;align-items:center;
+margin-bottom:17px
+}
+
+.shop-logo{
+width:68px;height:68px;border-radius:18px;
+background:#111;color:#d7ad45;
+display:flex;align-items:center;
+justify-content:center;
+font-size:24px;font-weight:900
+}
+
+.shop h3{font-size:18px;margin-bottom:5px}
+.shop-category{font-size:12px;color:#777}
+.rating{font-size:13px;margin-top:5px}
+
+.line{
+height:1px;background:#eee;margin:15px 0
+}
+
+.stats{
+display:flex;justify-content:space-between;
+font-size:12px;color:#777
+}
+
+.shop-buttons{
+display:flex;gap:8px;margin-top:16px
+}
+
+.shop-buttons button{
+flex:1;padding:11px;border-radius:10px;
+font-weight:bold
+}
+
+.visit{background:#111;color:#fff}
+.message{background:#eee;color:#111}
+
+.message:hover,.visit:hover{
+background:#d7ad45;color:#111
+}
+
+.seller-banner{
+margin-top:35px;
+background:white;border-radius:20px;
+padding:25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px
+}
+
+.seller-banner h2{margin-bottom:8px}
+.seller-banner p{color:#777;font-size:13px}
+
+.seller-btn{
+padding:13px 20px;
+border-radius:11px;
+background:#d7ad45;
+font-weight:bold;
+white-space:nowrap
+}
+
+footer{
+margin-top:50px;background:#09090b;color:white;
+padding:40px 20px
+}
+.footer{
+max-width:1200px;margin:auto;
+display:grid;grid-template-columns:2fr 1fr 1fr;
+gap:30px
+}
+footer h3{color:#d7ad45;margin-bottom:12px}
+footer p,footer li{
+color:#aaa;font-size:13px;line-height:1.9;
+list-style:none
+}
+
+@media(max-width:800px){
+.shops{grid-template-columns:repeat(2,1fr)}
+.seller-banner{flex-direction:column;align-items:flex-start}
+}
+
+@media(max-width:520px){
+.top{flex-wrap:wrap}
+.search{order:3;flex-basis:100%}
+.shops{grid-template-columns:1fr}
+.hero{padding:28px}
+.footer{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="top">
+
+<a href="index.html" class="logo">
+TURA<span>VOZ</span>
+</a>
+
+<div class="search">
+<input id="search"
+placeholder="Search shops..."
+onkeyup="searchShops()">
+</div>
+
+<button class="account" onclick="account()">
+👤 Account
+</button>
+
+</div>
+
+<nav class="nav">
+<a href="index.html">Home</a>
+<a href="index.html#products">Products</a>
+<a href="shops.html">Shops</a>
+<a href="index.html#categories">Categories</a>
+<a href="index.html#seller">Become a Seller</a>
+<a href="messages.html">Messages</a>
+</nav>
+</header>
+
+
+<main class="container">
+
+<section class="hero">
+<small>TURAVOZ MARKETPLACE</small>
+<h1>Discover Great Shops.</h1>
+<p>
+Explore independent sellers and their professional
+TURAVOZ shops. Every seller can build and manage
+their own marketplace presence.
+</p>
+</section>
+
+
+<div class="filters">
+<button class="filter active" onclick="filterShops('all',this)">
+All Shops
+</button>
+
+<button class="filter" onclick="filterShops('electronics',this)">
+Electronics
+</button>
+
+<button class="filter" onclick="filterShops('fashion',this)">
+Fashion
+</button>
+
+<button class="filter" onclick="filterShops('beauty',this)">
+Beauty
+</button>
+
+<button class="filter" onclick="filterShops('home',this)">
+Home
+</button>
+</div>
+
+
+<div class="title">
+<h2>Featured Shops</h2>
+<span id="shopCount">6 shops</span>
+</div>
+
+
+<section class="shops" id="shopGrid">
+
+
+<!-- SHOP 1 -->
+<article class="shop" data-category="electronics" data-name="Tech Store">
+<div class="shop-top">
+<div class="shop-logo">TS</div>
+<div>
+<h3>Tech Store</h3>
+<div class="shop-category">Electronics</div>
+<div class="rating">⭐ 4.8</div>
+</div>
+</div>
+
+<div class="line"></div>
+
+<div class="stats">
+<span>Products: 24</span>
+<span>Verified Seller ✓</span>
+</div>
+
+<div class="shop-buttons">
+<button class="visit" onclick="visitShop('Tech Store')">
+Visit Shop
+</button>
+<button class="message" onclick="messageSeller('Tech Store')">
+💬 Message
+</button>
+</div>
+</article>
+
+
+<!-- SHOP 2 -->
+<article class="shop" data-category="fashion" data-name="Urban Store">
+<div class="shop-top">
+<div class="shop-logo">US</div>
+<div>
+<h3>Urban Store</h3>
+<div class="shop-category">Fashion</div>
+<div class="rating">⭐ 4.7</div>
+</div>
+</div>
+
+<div class="line"></div>
+
+<div class="stats">
+<span>Products: 38</span>
+<span>Verified Seller ✓</span>
+</div>
+
+<div class="shop-buttons">
+<button class="visit" onclick="visitShop('Urban Store')">
+Visit Shop
+</button>
+<button class="message" onclick="messageSeller('Urban Store')">
+💬 Message
+</button>
+</div>
+</article>
+
+
+<!-- SHOP 3 -->
+<article class="shop" data-category="fashion" data-name="Style House">
+<div class="shop-top">
+<div class="shop-logo">SH</div>
+<div>
+<h3>Style House</h3>
+<div class="shop-category">Fashion</div>
+<div class="rating">⭐ 4.9</div>
+</div>
+</div>
+
+<div class="line"></div>
+
+<div class="stats">
+<span>Products: 31</span>
+<span>Verified Seller ✓</span>
+</div>
+
+<div class="shop-buttons">
+<button class="visit" onclick="visitShop('Style House')">
+Visit Shop
+</button>
+<button class="message" onclick="messageSeller('Style House')">
+💬 Message
+</button>
+</div>
+</article>
+
+
+<!-- SHOP 4 -->
+<article class="shop" data-category="beauty" data-name="Glow Store">
+<div class="shop-top">
+<div class="shop-logo">GS</div>
+<div>
+<h3>Glow Store</h3>
+<div class="shop-category">Beauty</div>
+<div class="rating">⭐ 4.6</div>
+</div>
+</div>
+
+<div class="line"></div>
+
+<div class="stats">
+<span>Products: 19</span>
+<span>Verified Seller ✓</span>
+</div>
+
+<div class="shop-buttons">
+<button class="visit" onclick="visitShop('Glow Store')">
+Visit Shop
+</button>
+<button class="message" onclick="messageSeller('Glow Store')">
+💬 Message
+</button>
+</div>
+</article>
+
+
+<!-- SHOP 5 -->
+<article class="shop" data-category="home" data-name="Home Living">
+<div class="shop-top">
+<div class="shop-logo">HL</div>
+<div>
+<h3>Home Living</h3>
+<div class="shop-category">Home</div>
+<div class="rating">⭐ 4.8</div>
+</div>
+</div>
+
+<div class="line"></div>
+
+<div class="stats">
+<span>Products: 27</span>
+<span>Verified Seller ✓</span>
+</div>
+
+<div class="shop-buttons">
+<button class="visit" onclick="visitShop('Home Living')">
+Visit Shop
+</button>
+<button class="message" onclick="messageSeller('Home Living')">
+💬 Message
+</button>
+</div>
+</article>
+
+
+<!-- SHOP 6 -->
+<article class="shop" data-category="electronics" data-name="Sound Hub">
+<div class="shop-top">
+<div class="shop-logo">SO</div>
+<div>
+<h3>Sound Hub</h3>
+<div class="shop-category">Electronics</div>
+<div class="rating">⭐ 4.7</div>
+</div>
+</div>
+
+<div class="line"></div>
+
+<div class="stats">
+<span>Products: 16</span>
+<span>Verified Seller ✓</span>
+</div>
+
+<div class="shop-buttons">
+<button class="visit" onclick="visitShop('Sound Hub')">
+Visit Shop
+</button>
+<button class="message" onclick="messageSeller('Sound Hub')">
+💬 Message
+</button>
+</div>
+</article>
+
+</section>
+
+
+<section class="seller-banner">
+
+<div>
+<h2>Want your own TURAVOZ Shop?</h2>
+<p>
+Register as a seller and create your professional
+shop on TURAVOZ.
+</p>
+</div>
+
+<button class="seller-btn"
+onclick="location.href='seller.html'">
+Become a Seller
+</button>
+
+</section>
+
+</main>
+
+
+<footer>
+<div class="footer">
+
+<div>
+<h3>TURAVOZ</h3>
+<p>
+A modern marketplace connecting customers
+with independent sellers and professional shops.
+</p>
+</div>
+
+<div>
+<h3>Marketplace</h3>
+<ul>
+<li>Products</li>
+<li>Shops</li>
+<li>Categories</li>
+<li>Orders</li>
+</ul>
+</div>
+
+<div>
+<h3>Seller</h3>
+<ul>
+<li>Become a Seller</li>
+<li>Seller Messages</li>
+<li>Sellers Group</li>
+<li>Seller Support</li>
+</ul>
+</div>
+
+</div>
+</footer>
+
+
+<script>
+
+function searchShops(){
+
+const value =
+document.getElementById("search")
+.value.toLowerCase();
+
+const shops =
+document.querySelectorAll(".shop");
+
+let count=0;
+
+shops.forEach(shop=>{
+
+const name =
+shop.dataset.name.toLowerCase();
+
+if(name.includes(value)){
+shop.style.display="block";
+count++;
+}else{
+shop.style.display="none";
+}
+
+});
+
+document.getElementById("shopCount").innerText =
+count+" shops";
+}
+
+
+function filterShops(category,button){
+
+document
+.querySelectorAll(".filter")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+const shops =
+document.querySelectorAll(".shop");
+
+let count=0;
+
+shops.forEach(shop=>{
+
+if(category==="all" ||
+shop.dataset.category===category){
+
+shop.style.display="block";
+count++;
+
+}else{
+shop.style.display="none";
+}
+
+});
+
+document.getElementById("shopCount").innerText =
+count+" shops";
+}
+
+
+function visitShop(name){
+
+alert(
+name+
+"\n\nProfessional seller shop page will be connected next."
+);
+
+}
+
+
+function messageSeller(name){
+
+alert(
+"Message "+name+
+"\n\nSeller messaging will be connected with the TURAVOZ communication system."
+);
+
+}
+
+
+function account(){
+
+alert(
+"TURAVOZ ACCOUNT\n\nLogin / Signup / Orders / Seller Account"
+);
+
+}
+
+</script>
+
+</body>
+</html>
