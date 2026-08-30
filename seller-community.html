@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090b">
+
+<title>TURAVOZ — Seller Community</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#08090b;
+  color:#fff;
+  min-height:100vh;
+}
+
+.header{
+  background:#0d0f12;
+  border-bottom:1px solid #292d33;
+  padding:17px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:#d4af37;
+}
+
+.back{
+  color:#fff;
+  text-decoration:none;
+  border:1px solid #3a3e44;
+  padding:10px 15px;
+  border-radius:12px;
+}
+
+.hero{
+  text-align:center;
+  padding:55px 20px 38px;
+  background:linear-gradient(180deg,#111318,#08090b);
+}
+
+.badge{
+  display:inline-block;
+  color:#d4af37;
+  border:1px solid #554821;
+  border-radius:30px;
+  padding:8px 15px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.hero p{
+  color:#aeb2b8;
+  max-width:680px;
+  margin:auto;
+  line-height:1.7;
+}
+
+.container{
+  max-width:1050px;
+  margin:auto;
+  padding:25px 18px 60px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:#111318;
+  border:1px solid #292d33;
+  border-radius:18px;
+  padding:22px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:27px;
+  color:#d4af37;
+  margin-bottom:5px;
+}
+
+.stat span{
+  color:#999fa7;
+  font-size:13px;
+}
+
+.section{
+  background:#111318;
+  border:1px solid #292d33;
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:20px;
+}
+
+.section h2{
+  margin-bottom:8px;
+}
+
+.sub{
+  color:#9da2a9;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+.announcement{
+  border:1px solid #393d43;
+  background:#0b0d10;
+  border-radius:15px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.announcement:last-child{
+  margin-bottom:0;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.top strong{
+  font-size:15px;
+}
+
+.date{
+  color:#777d85;
+  font-size:12px;
+}
+
+.announcement p{
+  color:#aeb2b8;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.action{
+  display:block;
+  text-decoration:none;
+  background:#0b0d10;
+  border:1px solid #34383e;
+  border-radius:15px;
+  padding:20px;
+  color:#fff;
+}
+
+.action:hover{
+  border-color:#d4af37;
+}
+
+.action .icon{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.action h3{
+  margin-bottom:7px;
+}
+
+.action p{
+  color:#949aa2;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.rules{
+  display:grid;
+  gap:10px;
+}
+
+.rule{
+  padding:14px;
+  border-radius:12px;
+  background:#0b0d10;
+  color:#b9bec5;
+  border:1px solid #292d33;
+  font-size:14px;
+}
+
+.rule b{
+  color:#d4af37;
+}
+
+.support{
+  text-align:center;
+  background:linear-gradient(135deg,#17150e,#101113);
+  border:1px solid #4b4020;
+}
+
+.support p{
+  color:#aeb2b8;
+  margin:10px auto 18px;
+  max-width:600px;
+  line-height:1.6;
+}
+
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  padding:13px 20px;
+  border-radius:12px;
+  font-weight:bold;
+  margin:4px;
+}
+
+.gold{
+  background:#d4af37;
+  color:#08090b;
+}
+
+.whatsapp{
+  background:#168a45;
+  color:#fff;
+}
+
+.footer{
+  border-top:1px solid #25282d;
+  text-align:center;
+  padding:25px;
+  color:#777d85;
+  font-size:13px;
+}
+
+@media(max-width:700px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:31px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo">
+    TURA<span>VOZ</span>
+  </div>
+
+  <a class="back" href="index.html">
+    ← Home
+  </a>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="badge">
+    TURAVOZ SELLER NETWORK
+  </div>
+
+  <h1>
+    Seller Community
+  </h1>
+
+  <p>
+    One professional place for TURAVOZ sellers to receive
+    announcements, support and marketplace updates.
+  </p>
+
+</section>
+
+
+<main class="container">
+
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong>ACTIVE</strong>
+      <span>Seller Network</span>
+    </div>
+
+    <div class="stat">
+      <strong>24/7</strong>
+      <span>Support Requests</span>
+    </div>
+
+    <div class="stat">
+      <strong>SAFE</strong>
+      <span>Marketplace Community</span>
+    </div>
+
+  </div>
+
+
+  <section class="section">
+
+    <h2>
+      📢 TURAVOZ Announcements
+    </h2>
+
+    <p class="sub">
+      Important information and updates for sellers.
+    </p>
+
+
+    <div class="announcement">
+
+      <div class="top">
+        <strong>Welcome to TURAVOZ Seller Network</strong>
+        <span class="date">Latest</span>
+      </div>
+
+      <p>
+        Welcome sellers! Keep your shop information,
+        products and customer service professional.
+      </p>
+
+    </div>
+
+
+    <div class="announcement">
+
+      <div class="top">
+        <strong>Seller Support is Available</strong>
+        <span class="date">Update</span>
+      </div>
+
+      <p>
+        If you have an account, product, order or technical
+        issue, contact the TURAVOZ support team.
+      </p>
+
+    </div>
+
+
+    <div class="announcement">
+
+      <div class="top">
+        <strong>New Marketplace Features</strong>
+        <span class="date">Coming Soon</span>
+      </div>
+
+      <p>
+        More seller tools, account features and marketplace
+        improvements will be added as TURAVOZ grows.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <h2>
+      Seller Services
+    </h2>
+
+    <p class="sub">
+      Quick access to important seller areas.
+    </p>
+
+
+    <div class="actions">
+
+
+      <a class="action" href="seller.html">
+
+        <div class="icon">🏪</div>
+
+        <h3>
+          Seller Dashboard
+        </h3>
+
+        <p>
+          Manage your seller profile, shop and marketplace
+          activities.
+        </p>
+
+      </a>
+
+
+      <a class="action" href="contact.html">
+
+        <div class="icon">💬</div>
+
+        <h3>
+          Contact TURAVOZ
+        </h3>
+
+        <p>
+          Send a support request directly to the TURAVOZ
+          support team.
+        </p>
+
+      </a>
+
+
+      <a class="action" href="shops.html">
+
+        <div class="icon">🛍️</div>
+
+        <h3>
+          Browse Shops
+        </h3>
+
+        <p>
+          Explore shops and discover products available
+          on TURAVOZ.
+        </p>
+
+      </a>
+
+
+      <a class="action" href="account.html">
+
+        <div class="icon">👤</div>
+
+        <h3>
+          My Account
+        </h3>
+
+        <p>
+          Access your account and manage your marketplace
+          profile.
+        </p>
+
+      </a>
+
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <h2>
+      🛡️ Seller Guidelines
+    </h2>
+
+    <p class="sub">
+      Keep the TURAVOZ marketplace trusted and professional.
+    </p>
+
+
+    <div class="rules">
+
+      <div class="rule">
+        <b>01.</b>
+        Use a professional display name.
+      </div>
+
+      <div class="rule">
+        <b>02.</b>
+        Add accurate product information.
+      </div>
+
+      <div class="rule">
+        <b>03.</b>
+        Communicate respectfully with customers.
+      </div>
+
+      <div class="rule">
+        <b>04.</b>
+        Never share your password or OTP.
+      </div>
+
+      <div class="rule">
+        <b>05.</b>
+        Follow TURAVOZ marketplace policies.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section support">
+
+    <h2>
+      Need Help?
+    </h2>
+
+    <p>
+      TURAVOZ sellers can contact support for account,
+      products, orders, payment, delivery or technical issues.
+    </p>
+
+
+    <a class="btn gold" href="contact.html">
+      Contact Support
+    </a>
+
+    <a
+      class="btn whatsapp"
+      href="https://wa.me/923343446939"
+      target="_blank">
+      WhatsApp TURAVOZ
+    </a>
+
+  </section>
+
+
+</main>
+
+
+<footer class="footer">
+
+  © 2026 TURAVOZ — Pakistan's Online Marketplace
+
+</footer>
+
+</body>
+</html>
