@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0b">
+
+<title>TURAVOZ — Seller Dashboard</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f6f8;
+  color:#111;
+}
+
+.header{
+  background:#0b0b0b;
+  color:white;
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.home{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:22px 15px 50px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#111,#292929);
+  color:white;
+  border-radius:22px;
+  padding:28px 22px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:#d5d5d5;
+  line-height:1.6;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 7px 25px rgba(0,0,0,.07);
+}
+
+.card h2{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.card p{
+  color:#666;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:16px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  margin-bottom:12px;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:#111;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  background:#111;
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button.secondary{
+  background:#eee;
+  color:#111;
+}
+
+button.green{
+  background:#16833b;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:white;
+  padding:18px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.stat b{
+  display:block;
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.stat span{
+  color:#777;
+  font-size:13px;
+}
+
+.icon{
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.notice{
+  display:none;
+  background:#e8f7ee;
+  color:#137333;
+  padding:13px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.seller-group{
+  grid-column:1/-1;
+}
+
+.member{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
+
+.member:last-child{
+  border-bottom:0;
+}
+
+.member-name{
+  font-weight:bold;
+}
+
+.online{
+  font-size:12px;
+  color:#16833b;
+}
+
+.footer{
+  text-align:center;
+  color:#777;
+  font-size:13px;
+  margin-top:30px;
+}
+
+@media(max-width:700px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">TURAVOZ</div>
+  <a class="home" href="index.html">← Home</a>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h1>Seller Dashboard</h1>
+    <p>
+      Manage your shop, products and communication with TURAVOZ
+      from one professional dashboard.
+    </p>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <b id="productCount">0</b>
+      <span>Products</span>
+    </div>
+
+    <div class="stat">
+      <b id="orderCount">0</b>
+      <span>Orders</span>
+    </div>
+
+    <div class="stat">
+      <b>Active</b>
+      <span>Seller Status</span>
+    </div>
+  </section>
+
+  <section class="grid">
+
+    <!-- SELLER NAME -->
+    <div class="card">
+      <div class="icon">👤</div>
+      <h2>Your Name</h2>
+      <p>
+        Enter only your name. Your owner title will not be displayed.
+      </p>
+
+      <input
+        id="sellerName"
+        type="text"
+        placeholder="Enter your name"
+      >
+
+      <button onclick="saveName()">
+        Save Name
+      </button>
+
+      <div id="nameNotice" class="notice">
+        ✓ Name saved successfully.
+      </div>
+    </div>
+
+    <!-- SHOP -->
+    <div class="card">
+      <div class="icon">🏪</div>
+      <h2>Create Your Shop</h2>
+      <p>
+        Set up your own shop on TURAVOZ.
+      </p>
+
+      <input
+        id="shopName"
+        type="text"
+        placeholder="Shop name"
+      >
+
+      <select id="category">
+        <option value="">Select category</option>
+        <option>Fashion</option>
+        <option>Electronics</option>
+        <option>Beauty</option>
+        <option>Home & Living</option>
+        <option>Food</option>
+        <option>Books</option>
+        <option>Other</option>
+      </select>
+
+      <button onclick="createShop()">
+        Create Shop
+      </button>
+
+      <div id="shopNotice" class="notice">
+        ✓ Shop information saved.
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="card">
+      <div class="icon">📦</div>
+      <h2>Products</h2>
+      <p>
+        Add and manage products in your shop.
+      </p>
+
+      <input
+        id="productName"
+        type="text"
+        placeholder="Product name"
+      >
+
+      <input
+        id="productPrice"
+        type="number"
+        placeholder="Price in PKR"
+      >
+
+      <button onclick="addProduct()">
+        + Add Product
+      </button>
+
+      <div id="productNotice" class="notice">
+        ✓ Product added successfully.
+      </div>
+    </div>
+
+    <!-- CONTACT TURAVOZ -->
+    <div class="card">
+      <div class="icon">💬</div>
+      <h2>Contact TURAVOZ</h2>
+      <p>
+        Need help? Send a message to the TURAVOZ team.
+      </p>
+
+      <textarea
+        id="supportMessage"
+        rows="4"
+        placeholder="Write your message..."
+      ></textarea>
+
+      <button onclick="sendMessage()">
+        Send Message
+      </button>
+
+      <div id="messageNotice" class="notice">
+        ✓ Your message has been prepared.
+      </div>
+    </div>
+
+    <!-- SELLERS GROUP -->
+    <div class="card seller-group">
+      <div class="icon">👥</div>
+      <h2>TURAVOZ Sellers Group</h2>
+      <p>
+        A private communication area for TURAVOZ sellers.
+        New approved sellers can be added here.
+      </p>
+
+      <div class="member">
+        <div>
+          <div class="member-name">TURAVOZ Team</div>
+          <div class="online">● Official</div>
+        </div>
+      </div>
+
+      <div class="member">
+        <div>
+          <div class="member-name">Seller Community</div>
+          <div class="online">● Sellers Area</div>
+        </div>
+      </div>
+
+      <button
+        class="secondary"
+        onclick="openGroup()"
+      >
+        Open Sellers Group
+      </button>
+
+      <div id="groupNotice" class="notice">
+        Sellers Group area opened.
+      </div>
+    </div>
+
+  </section>
+
+  <div class="footer">
+    © 2026 TURAVOZ — Pakistan's Online Marketplace
+  </div>
+
+</main>
+
+<script>
+
+let products =
+  Number(localStorage.getItem("turavozProducts")) || 0;
+
+document.getElementById("productCount").innerText = products;
+
+function saveName(){
+
+  const name =
+    document.getElementById("sellerName").value.trim();
+
+  if(!name){
+    alert("Please enter your name.");
+    return;
+  }
+
+  localStorage.setItem("turavozSellerName",name);
+
+  document.getElementById("nameNotice").style.display="block";
+}
+
+function createShop(){
+
+  const shop =
+    document.getElementById("shopName").value.trim();
+
+  const category =
+    document.getElementById("category").value;
+
+  if(!shop || !category){
+    alert("Please enter shop name and select a category.");
+    return;
+  }
+
+  localStorage.setItem("turavozShopName",shop);
+  localStorage.setItem("turavozCategory",category);
+
+  document.getElementById("shopNotice").style.display="block";
+}
+
+function addProduct(){
+
+  const name =
+    document.getElementById("productName").value.trim();
+
+  const price =
+    document.getElementById("productPrice").value;
+
+  if(!name || !price){
+    alert("Please enter product name and price.");
+    return;
+  }
+
+  products++;
+
+  localStorage.setItem(
+    "turavozProducts",
+    products
+  );
+
+  document.getElementById("productCount").innerText =
+    products;
+
+  document.getElementById("productNotice").style.display =
+    "block";
+
+  document.getElementById("productName").value="";
+  document.getElementById("productPrice").value="";
+}
+
+function sendMessage(){
+
+  const message =
+    document.getElementById("supportMessage").value.trim();
+
+  if(!message){
+    alert("Please write your message.");
+    return;
+  }
+
+  document.getElementById("messageNotice").style.display =
+    "block";
+}
+
+function openGroup(){
+
+  document.getElementById("groupNotice").style.display =
+    "block";
+}
+
+</script>
+
+</body>
+</html>
