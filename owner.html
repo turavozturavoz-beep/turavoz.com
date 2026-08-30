@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TURAVOZ Owner Login</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:#080808;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.container{
+  width:100%;
+  max-width:430px;
+  padding:20px;
+}
+
+.logo{
+  text-align:center;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:4px;
+  margin-bottom:25px;
+}
+
+.logo span{
+  color:#dcb13f;
+}
+
+.card{
+  background:#151515;
+  border:1px solid #303030;
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 15px 45px rgba(0,0,0,.5);
+}
+
+.owner-icon{
+  text-align:center;
+  font-size:42px;
+  margin-bottom:8px;
+}
+
+h1{
+  text-align:center;
+  margin:0;
+  font-size:27px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#999;
+  margin:9px 0 25px;
+}
+
+label{
+  display:block;
+  color:#bbb;
+  font-size:14px;
+  margin:15px 0 7px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:11px;
+  border:1px solid #3a3a3a;
+  background:#0c0c0c;
+  color:#fff;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#dcb13f;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:20px;
+  border:0;
+  border-radius:11px;
+  background:#dcb13f;
+  color:#111;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  color:#999;
+  text-decoration:none;
+  margin-top:20px;
+  font-size:14px;
+}
+
+.message{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  background:#242424;
+  color:#ddd;
+  text-align:center;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">
+    <span>TURA</span>VOZ
+  </div>
+
+  <div class="card">
+
+    <div class="owner-icon">👑</div>
+
+    <h1>Owner Login</h1>
+
+    <p class="subtitle">
+      TURAVOZ Administration
+    </p>
+
+    <form onsubmit="ownerLogin(event)">
+
+      <label>Email</label>
+
+      <input
+        id="ownerEmail"
+        type="email"
+        placeholder="Owner email"
+        required
+      >
+
+      <label>Password</label>
+
+      <input
+        id="ownerPassword"
+        type="password"
+        placeholder="Owner password"
+        required
+      >
+
+      <button type="submit">
+        👑 Owner Login
+      </button>
+
+    </form>
+
+    <div id="message" class="message"></div>
+
+    <a href="index.html" class="back">
+      ← Back to TURAVOZ
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+
+function ownerLogin(event){
+
+  event.preventDefault();
+
+  const message =
+    document.getElementById("message");
+
+  message.style.display = "block";
+
+  message.textContent =
+    "Owner authentication is ready to be connected securely.";
+
+}
+
+</script>
+
+</body>
+</html>
