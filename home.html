@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TURAVOZ — Pakistan's Online Marketplace</title>
+  <meta name="description" content="TURAVOZ — Pakistan's online marketplace for products, shops and sellers.">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .home-top{
+      padding:18px 0;
+      background:#0b0c0f;
+      border-bottom:1px solid #24272c;
+    }
+
+    .home-search{
+      max-width:850px;
+      margin:auto;
+      display:flex;
+      gap:10px;
+    }
+
+    .home-search input{
+      flex:1;
+      background:#15171b;
+      color:#fff;
+      border:1px solid #363a40;
+      border-radius:12px;
+      padding:14px 16px;
+      outline:none;
+    }
+
+    .home-search input:focus{
+      border-color:#d4af37;
+    }
+
+    .category-card{
+      text-decoration:none;
+      text-align:center;
+      background:#111318;
+      border:1px solid #292d33;
+      border-radius:16px;
+      padding:22px 10px;
+      transition:.2s;
+    }
+
+    .category-card:hover{
+      transform:translateY(-3px);
+      border-color:#d4af37;
+    }
+
+    .category-icon{
+      font-size:32px;
+      margin-bottom:8px;
+    }
+
+    .category-card strong{
+      font-size:14px;
+    }
+
+    .feature-box{
+      text-align:center;
+      padding:25px 15px;
+    }
+
+    .feature-icon{
+      font-size:38px;
+      margin-bottom:10px;
+    }
+
+    .feature-box h3{
+      margin-bottom:6px;
+    }
+
+    .home-cta{
+      text-align:center;
+      background:
+        radial-gradient(circle at center,#29220c,transparent 65%),
+        #101216;
+      border:1px solid #39321d;
+      border-radius:20px;
+      padding:45px 20px;
+    }
+
+    .home-cta h2{
+      font-size:32px;
+      margin-bottom:10px;
+    }
+
+    .home-cta p{
+      color:#9da2a9;
+      max-width:600px;
+      margin:0 auto 22px;
+    }
+
+    .mini-links{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    .mini-links a{
+      text-decoration:none;
+      color:#c5c8cd;
+      border:1px solid #30343a;
+      background:#14161a;
+      padding:9px 13px;
+      border-radius:10px;
+      font-size:13px;
+    }
+
+    .mini-links a:hover{
+      color:#d4af37;
+      border-color:#d4af37;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="tvz-header">
+    <nav class="tvz-nav">
+
+      <a href="home.html" class="tvz-logo">
+        TURA<span>VOZ</span>
+      </a>
+
+      <ul class="tvz-menu">
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="shops.html">Shops</a></li>
+        <li><a href="product.html">Products</a></li>
+        <li><a href="seller.html">Sell on TURAVOZ</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+
+      <a href="cart.html" class="tvz-btn tvz-btn-dark">
+        🛒 Cart
+      </a>
+
+    </nav>
+  </header>
+
+
+  <!-- SEARCH -->
+  <section class="home-top">
+    <div class="tvz-container">
+
+      <form class="home-search" onsubmit="searchProducts(event)">
+        <input
+          type="search"
+          id="searchBox"
+          placeholder="Search products, shops or sellers..."
+        >
+
+        <button class="tvz-btn tvz-btn-gold" type="submit">
+          🔎 Search
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- HERO -->
+  <main>
+
+    <section class="tvz-hero">
+      <div class="tvz-container">
+
+        <div class="tvz-hero-content">
+
+          <span class="tvz-badge">
+            🇵🇰 MADE FOR PAKISTAN
+          </span>
+
+          <h1>
+            Shop Smart.<br>
+            Sell Better with
+            <span>TURAVOZ.</span>
+          </h1>
+
+          <p>
+            Pakistan's modern online marketplace connecting customers,
+            trusted sellers and growing businesses in one powerful platform.
+          </p>
+
+          <div class="tvz-hero-actions">
+
+            <a href="product.html" class="tvz-btn tvz-btn-gold">
+              🛍️ Explore Products
+            </a>
+
+            <a href="shops.html" class="tvz-btn tvz-btn-dark">
+              🏪 Browse Shops
+            </a>
+
+            <a href="seller.html" class="tvz-btn tvz-btn-dark">
+              🚀 Become a Seller
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CATEGORIES -->
+    <section class="tvz-section">
+
+      <div class="tvz-container">
+
+        <div class="tvz-title">
+          <h2>Shop by Category</h2>
+          <p>Find what you need quickly.</p>
+        </div>
+
+        <div class="tvz-grid">
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">📱</div>
+            <strong>Electronics</strong>
+          </a>
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">👕</div>
+            <strong>Fashion</strong>
+          </a>
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">🏠</div>
+            <strong>Home & Living</strong>
+          </a>
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">💄</div>
+            <strong>Beauty</strong>
+          </a>
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">🎮</div>
+            <strong>Gaming</strong>
+          </a>
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">📚</div>
+            <strong>Education</strong>
+          </a>
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">⚽</div>
+            <strong>Sports</strong>
+          </a>
+
+          <a href="product.html" class="category-card">
+            <div class="category-icon">➕</div>
+            <strong>More</strong>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="tvz-section">
+
+      <div class="tvz-container">
+
+        <div class="tvz-title">
+          <h2>Why TURAVOZ?</h2>
+          <p>Built for buyers and sellers in Pakistan.</p>
+        </div>
+
+        <div class="tvz-grid-3">
+
+          <div class="tvz-card feature-box">
+            <div class="feature-icon">🔐</div>
+            <h3>Secure Shopping</h3>
+            <p>
+              A simple and secure marketplace experience
+              for customers.
+            </p>
+          </div>
+
+          <div class="tvz-card feature-box">
+            <div class="feature-icon">🏪</div>
+            <h3>Seller Shops</h3>
+            <p>
+              Every seller can build and manage their own
+              online shop.
+            </p>
+          </div>
+
+          <div class="tvz-card feature-box">
+            <div class="feature-icon">📦</div>
+            <h3>Order Management</h3>
+            <p>
+              Keep track of purchases and orders from your
+              account.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- QUICK ACCESS -->
+    <section class="tvz-section">
+
+      <div class="tvz-container">
+
+        <div class="tvz-title">
+          <h2>Quick Access</h2>
+          <p>Everything you need in one place.</p>
+        </div>
+
+        <div class="tvz-grid-2">
+
+          <a href="product.html" class="tvz-card" style="text-decoration:none;">
+            <h3>🛍️ Products</h3>
+            <p>Explore products from TURAVOZ sellers.</p>
+          </a>
+
+          <a href="shops.html" class="tvz-card" style="text-decoration:none;">
+            <h3>🏪 Shops</h3>
+            <p>Discover shops and local sellers.</p>
+          </a>
+
+          <a href="orders.html" class="tvz-card" style="text-decoration:none;">
+            <h3>📦 My Orders</h3>
+            <p>View and track your orders.</p>
+          </a>
+
+          <a href="account.html" class="tvz-card" style="text-decoration:none;">
+            <h3>👤 My Account</h3>
+            <p>Manage your TURAVOZ account.</p>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SELLER CTA -->
+    <section class="tvz-section">
+
+      <div class="tvz-container">
+
+        <div class="home-cta">
+
+          <span class="tvz-badge">
+            SELL ON TURAVOZ
+          </span>
+
+          <h2>Grow Your Business Online</h2>
+
+          <p>
+            Create your seller profile, showcase your products
+            and reach customers through TURAVOZ.
+          </p>
+
+          <a href="seller.html" class="tvz-btn tvz-btn-gold">
+            🚀 Start Selling
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SUPPORT -->
+    <section class="tvz-section">
+
+      <div class="tvz-container">
+
+        <div class="tvz-title">
+          <h2>Need Help?</h2>
+          <p>We're here to help customers and sellers.</p>
+        </div>
+
+        <div class="mini-links">
+
+          <a href="contact.html">💬 Contact Support</a>
+
+          <a href="seller-community.html">
+            👥 Seller Community
+          </a>
+
+          <a href="account.html">
+            👤 Account
+          </a>
+
+          <a href="orders.html">
+            📦 Track Orders
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="tvz-footer">
+
+    <div class="tvz-footer-inner">
+
+      <div>
+        <a href="home.html" class="tvz-logo">
+          TURA<span>VOZ</span>
+        </a>
+
+        <p style="margin-top:12px;">
+          Pakistan's online marketplace connecting
+          buyers, sellers and businesses.
+        </p>
+      </div>
+
+      <div>
+        <h3>Marketplace</h3>
+
+        <a href="product.html">Products</a>
+        <a href="shops.html">Shops</a>
+        <a href="cart.html">Cart</a>
+        <a href="orders.html">Orders</a>
+      </div>
+
+      <div>
+        <h3>Support</h3>
+
+        <a href="contact.html">Contact</a>
+        <a href="account.html">Account</a>
+        <a href="seller.html">Become a Seller</a>
+        <a href="seller-community.html">Seller Community</a>
+      </div>
+
+    </div>
+
+    <div class="tvz-copyright">
+      © 2026 TURAVOZ. All rights reserved.
+    </div>
+
+  </footer>
+
+
+  <script>
+    function searchProducts(event){
+      event.preventDefault();
+
+      const search =
+        document.getElementById("searchBox").value.trim();
+
+      if(search === ""){
+        alert("Please enter a product or shop name.");
+        return;
+      }
+
+      window.location.href =
+        "product.html?search=" +
+        encodeURIComponent(search);
+    }
+  </script>
+
+</body>
+</html>
