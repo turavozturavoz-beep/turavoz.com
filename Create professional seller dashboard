@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0b">
+<title>TURAVOZ — Seller Dashboard</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#f5f6f8;
+  color:#111;
+}
+
+.header{
+  background:#0b0b0b;
+  color:white;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:#d4af37;
+}
+
+.profile{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#d4af37;
+  color:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#111,#292929);
+  color:white;
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 10px 30px #0002;
+}
+
+.hero h1{
+  font-size:27px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:#ccc;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.stat{
+  background:#fff;
+  border-radius:15px;
+  padding:18px;
+  box-shadow:0 5px 18px #0000000d;
+}
+
+.stat small{
+  color:#777;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  margin-top:7px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 5px 20px #0000000d;
+  margin-bottom:18px;
+}
+
+.card h2{
+  font-size:19px;
+  margin-bottom:15px;
+}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:13px 18px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:5px 4px 5px 0;
+}
+
+.btn-primary{
+  background:#0b0b0b;
+  color:white;
+}
+
+.btn-gold{
+  background:#d4af37;
+  color:#000;
+}
+
+.btn-light{
+  background:#f0f1f3;
+  color:#111;
+}
+
+.input{
+  width:100%;
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin-bottom:10px;
+  outline:none;
+}
+
+.product{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:13px;
+  margin-bottom:10px;
+}
+
+.product-info strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.badge{
+  background:#e9f8ee;
+  color:#16803c;
+  padding:6px 9px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.message-box{
+  background:#f7f7f7;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+.message{
+  background:white;
+  padding:12px;
+  border-radius:12px;
+  margin:8px 0;
+}
+
+.footer{
+  text-align:center;
+  padding:30px;
+  color:#777;
+}
+
+@media(max-width:700px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:23px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">TURA<span>VOZ</span></div>
+  <div class="profile" id="profileLetter">S</div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <h1>Seller Dashboard</h1>
+  <p>Manage your shop, products, orders and seller communication professionally.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <small>Total Products</small>
+      <strong id="productsCount">0</strong>
+    </div>
+
+    <div class="stat">
+      <small>Orders</small>
+      <strong>0</strong>
+    </div>
+
+    <div class="stat">
+      <small>Sales</small>
+      <strong>Rs 0</strong>
+    </div>
+
+    <div class="stat">
+      <small>Rating</small>
+      <strong>★ 5.0</strong>
+    </div>
+  </div>
+</section>
+
+<div class="grid">
+
+<section class="card">
+  <h2>👤 Seller Profile</h2>
+
+  <input
+    class="input"
+    id="sellerName"
+    placeholder="Enter your name"
+  >
+
+  <input
+    class="input"
+    id="shopName"
+    placeholder="Shop name"
+  >
+
+  <input
+    class="input"
+    placeholder="WhatsApp number"
+    type="tel"
+  >
+
+  <button class="btn btn-primary" onclick="saveProfile()">
+    Save Profile
+  </button>
+
+  <button class="btn btn-gold" onclick="fingerprintLogin()">
+    🔐 Fingerprint / Passkey
+  </button>
+</section>
+
+<section class="card">
+  <h2>🛍️ Shop Management</h2>
+
+  <button class="btn btn-primary" onclick="addProduct()">
+    + Add Product
+  </button>
+
+  <button class="btn btn-light" onclick="openShops()">
+    View My Shop
+  </button>
+
+  <button class="btn btn-light" onclick="alert('Orders section is ready for backend connection.')">
+    📦 Orders
+  </button>
+
+  <button class="btn btn-light" onclick="alert('Analytics will appear here.')">
+    📊 Analytics
+  </button>
+</section>
+
+</div>
+
+<section class="card">
+  <h2>📦 My Products</h2>
+
+  <div id="productList">
+    <p style="color:#777;">No products added yet.</p>
+  </div>
+</section>
+
+<section class="card">
+  <h2>💬 TURAVOZ Seller Group</h2>
+
+  <div class="message-box">
+    <strong>Seller Community</strong>
+    <p style="color:#777;margin-top:5px;">
+      Connect with TURAVOZ support and other sellers.
+    </p>
+
+    <div class="message">
+      <strong>TURAVOZ Support</strong>
+      <p>Welcome to the seller community.</p>
+    </div>
+
+    <div class="message">
+      <strong>Admin</strong>
+      <p>For seller-related help, contact TURAVOZ support.</p>
+    </div>
+  </div>
+
+  <input
+    class="input"
+    id="sellerMessage"
+    placeholder="Write a message..."
+  >
+
+  <button class="btn btn-primary" onclick="sendMessage()">
+    Send Message
+  </button>
+
+  <button class="btn btn-gold" onclick="contactSupport()">
+    📞 Contact TURAVOZ
+  </button>
+</section>
+
+<section class="card">
+  <h2>⚙️ Seller Settings</h2>
+
+  <button class="btn btn-light" onclick="alert('Notification settings opened.')">
+    🔔 Notifications
+  </button>
+
+  <button class="btn btn-light" onclick="alert('Payment settings will be connected later.')">
+    💳 Payment Settings
+  </button>
+
+  <button class="btn btn-light" onclick="alert('Delivery settings will be connected later.')">
+    🚚 Delivery Settings
+  </button>
+
+  <button class="btn btn-light" onclick="alert('Security settings opened.')">
+    🔐 Security
+  </button>
+</section>
+
+</main>
+
+<footer class="footer">
+  © 2026 TURAVOZ — Pakistan's Online Marketplace
+</footer>
+
+<script>
+
+let products = JSON.parse(localStorage.getItem("turavozProducts") || "[]");
+
+function updateProducts(){
+  const list = document.getElementById("productList");
+
+  document.getElementById("productsCount").textContent = products.length;
+
+  if(products.length === 0){
+    list.innerHTML = '<p style="color:#777;">No products added yet.</p>';
+    return;
+  }
+
+  list.innerHTML = products.map((p,index)=>`
+    <div class="product">
+      <div class="product-info">
+        <strong>${p.name}</strong>
+        <span>Rs ${p.price}</span>
+      </div>
+
+      <div>
+        <span class="badge">Active</span>
+        <button class="btn btn-light"
+          onclick="deleteProduct(${index})">
+          Delete
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function addProduct(){
+
+  const name = prompt("Product name:");
+
+  if(!name) return;
+
+  const price = prompt("Product price (Rs):");
+
+  if(!price) return;
+
+  products.push({
+    name:name,
+    price:price
+  });
+
+  localStorage.setItem(
+    "turavozProducts",
+    JSON.stringify(products)
+  );
+
+  updateProducts();
+
+  alert("Product added successfully!");
+}
+
+function deleteProduct(index){
+
+  if(confirm("Delete this product?")){
+
+    products.splice(index,1);
+
+    localStorage.setItem(
+      "turavozProducts",
+      JSON.stringify(products)
+    );
+
+    updateProducts();
+  }
+}
+
+function saveProfile(){
+
+  const name =
+    document.getElementById("sellerName").value.trim();
+
+  const shop =
+    document.getElementById("shopName").value.trim();
+
+  if(!name){
+    alert("Please enter your name.");
+    return;
+  }
+
+  localStorage.setItem("turavozSellerName",name);
+  localStorage.setItem("turavozShopName",shop);
+
+  document.getElementById("profileLetter")
+    .textContent = name.charAt(0).toUpperCase();
+
+  alert("Seller profile saved!");
+}
+
+function loadProfile(){
+
+  const name =
+    localStorage.getItem("turavozSellerName") || "";
+
+  const shop =
+    localStorage.getItem("turavozShopName") || "";
+
+  document.getElementById("sellerName").value = name;
+  document.getElementById("shopName").value = shop;
+
+  if(name){
+    document.getElementById("profileLetter")
+      .textContent = name.charAt(0).toUpperCase();
+  }
+}
+
+function sendMessage(){
+
+  const input =
+    document.getElementById("sellerMessage");
+
+  const text = input.value.trim();
+
+  if(!text){
+    alert("Write a message first.");
+    return;
+  }
+
+  alert(
+    "Message saved. Real-time seller messaging will be connected with the backend."
+  );
+
+  input.value = "";
+}
+
+function contactSupport(){
+
+  window.location.href =
+    "https://wa.me/?text=Hello%20TURAVOZ%20Support";
+}
+
+function openShops(){
+
+  window.location.href = "shops.html";
+}
+
+function fingerprintLogin(){
+
+  if(window.PublicKeyCredential){
+
+    alert(
+      "Your device supports Passkey/Fingerprint authentication. " +
+      "Final fingerprint login requires HTTPS + backend authentication."
+    );
+
+  }else{
+
+    alert(
+      "Fingerprint/Passkey is not supported by this browser."
+    );
+  }
+}
+
+updateProducts();
+loadProfile();
+
+</script>
+
+</body>
+</html>
