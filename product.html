@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0b">
+<title>TURAVOZ — Product</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f6f8;
+  color:#111;
+}
+
+header{
+  background:#0b0b0b;
+  color:white;
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.back{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.container{
+  max-width:1000px;
+  margin:30px auto;
+  padding:15px;
+}
+
+.product{
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.product-image{
+  min-height:350px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#111,#333);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:80px;
+}
+
+.badge{
+  display:inline-block;
+  background:#111;
+  color:white;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+h1{
+  font-size:34px;
+  margin-bottom:12px;
+}
+
+.price{
+  font-size:30px;
+  font-weight:bold;
+  margin:20px 0;
+}
+
+.info{
+  color:#666;
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+.seller{
+  border-top:1px solid #eee;
+  padding-top:18px;
+  margin-top:20px;
+}
+
+.seller strong{
+  font-size:18px;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  margin-top:25px;
+}
+
+button{
+  border:0;
+  padding:14px 20px;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.cart{
+  background:#111;
+  color:white;
+  flex:1;
+}
+
+.contact{
+  background:#eee;
+  color:#111;
+}
+
+.message{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  background:#e8f7ee;
+  color:#137333;
+}
+
+@media(max-width:700px){
+  .product{
+    grid-template-columns:1fr;
+  }
+
+  .product-image{
+    min-height:260px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">TURAVOZ</div>
+  <a class="back" href="shops.html">← All Shops</a>
+</header>
+
+<div class="container">
+
+  <div class="product">
+
+    <div class="product-image">
+      🛍️
+    </div>
+
+    <div>
+
+      <span class="badge">TURAVOZ MARKETPLACE</span>
+
+      <h1>Product Name</h1>
+
+      <div class="price">₨ 2,500</div>
+
+      <p class="info">
+        Quality product available from a verified TURAVOZ seller.
+        Product details, availability and delivery information will
+        appear here.
+      </p>
+
+      <div class="seller">
+        <p>Sold by</p>
+        <strong>Seller Name</strong>
+        <p class="info">Pakistan</p>
+      </div>
+
+      <div class="buttons">
+        <button class="cart" onclick="addToCart()">
+          🛒 Add to Cart
+        </button>
+
+        <button class="contact" onclick="contactSeller()">
+          💬 Contact
+        </button>
+      </div>
+
+      <div id="message" class="message">
+        Added successfully to your cart.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function addToCart(){
+  document.getElementById("message").style.display="block";
+  document.getElementById("message").innerText=
+    "✓ Product added to your cart.";
+}
+
+function contactSeller(){
+  document.getElementById("message").style.display="block";
+  document.getElementById("message").innerText=
+    "💬 Seller contact system will open here.";
+}
+</script>
+
+</body>
+</html>
