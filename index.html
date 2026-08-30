@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b0d">
+  <title>TURAVOZ — Marketplace</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f6f6f7;
+      color: #111;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    /* HEADER */
+    header {
+      background: #09090b;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,.18);
+    }
+
+    .topbar {
+      max-width: 1250px;
+      margin: auto;
+      min-height: 72px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #d7ad45;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .search {
+      flex: 1;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 14px 48px 14px 18px;
+      border-radius: 30px;
+      border: 1px solid #333;
+      outline: none;
+      background: #18181b;
+      color: white;
+      font-size: 14px;
+    }
+
+    .search input::placeholder {
+      color: #aaa;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 17px;
+      top: 13px;
+      font-size: 18px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .head-btn {
+      background: #18181b;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 11px 13px;
+    }
+
+    .head-btn:hover {
+      border-color: #d7ad45;
+      color: #d7ad45;
+    }
+
+    /* NAV */
+    .nav {
+      max-width: 1250px;
+      margin: auto;
+      padding: 0 18px 12px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+    }
+
+    .nav button {
+      background: transparent;
+      color: #ddd;
+      padding: 7px 12px;
+      white-space: nowrap;
+      border-radius: 8px;
+    }
+
+    .nav button:hover {
+      background: #202024;
+      color: #d7ad45;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1250px;
+      margin: 25px auto;
+      padding: 0 18px;
+    }
+
+    .hero-box {
+      min-height: 310px;
+      border-radius: 25px;
+      padding: 50px;
+      background:
+        radial-gradient(circle at 85% 25%, rgba(215,173,69,.35), transparent 30%),
+        linear-gradient(135deg, #0b0b0d, #242426);
+      color: white;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero small {
+      color: #d7ad45;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 65px);
+      margin: 12px 0;
+      line-height: 1;
+    }
+
+    .hero p {
+      color: #ccc;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .hero-btn {
+      margin-top: 25px;
+      padding: 14px 25px;
+      border-radius: 30px;
+      background: #d7ad45;
+      color: #080808;
+      font-weight: bold;
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 1250px;
+      margin: 35px auto;
+      padding: 0 18px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 17px;
+    }
+
+    .section-title h2 {
+      font-size: 24px;
+    }
+
+    .view {
+      color: #9a7622;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 13px;
+    }
+
+    .category {
+      background: white;
+      padding: 22px 10px;
+      border-radius: 17px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,.06);
+      transition: .2s;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,.1);
+    }
+
+    .category .icon {
+      font-size: 31px;
+      margin-bottom: 9px;
+    }
+
+    .category b {
+      font-size: 13px;
+    }
+
+    /* PRODUCTS */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 17px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.07);
+      transition: .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-image {
+      height: 185px;
+      background: linear-gradient(135deg,#eee,#d7d7d7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-name {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .shop-name {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: #111;
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .add-cart {
+      width: 100%;
+      margin-top: 12px;
+      padding: 11px;
+      border-radius: 10px;
+      background: #0b0b0d;
+      color: white;
+      font-weight: bold;
+    }
+
+    .add-cart:hover {
+      background: #d7ad45;
+      color: #111;
+    }
+
+    /* SHOPS */
+    .shops {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .shop-card {
+      background: white;
+      border-radius: 19px;
+      padding: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.07);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .shop-logo {
+      min-width: 65px;
+      height: 65px;
+      border-radius: 18px;
+      background: #111;
+      color: #d7ad45;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .shop-card h3 {
+      margin-bottom: 5px;
+    }
+
+    .shop-card p {
+      color: #777;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .shop-card button {
+      padding: 8px 13px;
+      border-radius: 9px;
+      background: #eee;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    /* SELLER AREA */
+    .seller-panel {
+      background: #111113;
+      color: white;
+      border-radius: 23px;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .seller-panel h2 {
+      color: #d7ad45;
+      margin-bottom: 10px;
+    }
+
+    .seller-panel p {
+      color: #bbb;
+      line-height: 1.6;
+    }
+
+    .seller-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .seller-btn {
+      padding: 13px 17px;
+      border-radius: 11px;
+      background: #d7ad45;
+      color: #111;
+      font-weight: bold;
+    }
+
+    .seller-btn.dark {
+      background: #252527;
+      color: white;
+      border: 1px solid #444;
+    }
+
+    /* GROUP */
+    .group {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    .group-head {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .group-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 17px;
+      background: #111;
+      color: #d7ad45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+    }
+
+    .group p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    .seller-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .seller-pill {
+      padding: 8px 12px;
+      background: #f0f0f0;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #09090b;
+      color: white;
+      margin-top: 50px;
+      padding: 40px 18px;
+    }
+
+    .footer-grid {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    footer h3 {
+      color: #d7ad45;
+      margin-bottom: 13px;
+    }
+
+    footer p,
+    footer li {
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.8;
+      list-style: none;
+    }
+
+    /* MOBILE */
+    @media(max-width: 850px) {
+      .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .search {
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .categories {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .shops {
+        grid-template-columns: 1fr;
+      }
+
+      .seller-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-box {
+        padding: 30px;
+      }
+    }
+
+    @media(max-width: 480px) {
+      .logo {
+        font-size: 22px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .product-image {
+        height: 140px;
+      }
+
+      .hero-box {
+        min-height: 280px;
+        padding: 25px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="topbar">
+
+    <a href="index.html" class="logo">
+      TURA<span>VOZ</span>
+    </a>
+
+    <div class="search">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search products, shops..."
+        onkeyup="searchProducts()">
+      <span class="search-icon">⌕</span>
+    </div>
+
+    <div class="header-actions">
+      <button class="head-btn" onclick="openAccount()">👤</button>
+      <button class="head-btn" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+    </div>
+
+  </div>
+
+  <nav class="nav">
+    <button onclick="scrollToSection('products')">Products</button>
+    <button onclick="scrollToSection('shops')">Shops</button>
+    <button onclick="scrollToSection('categories')">Categories</button>
+    <button onclick="scrollToSection('seller')">Become a Seller</button>
+    <button onclick="openMessages()">Messages</button>
+    <button onclick="openAccount()">Account</button>
+  </nav>
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-box">
+      <div class="hero-content">
+        <small>WELCOME TO TURAVOZ</small>
+        <h1>Discover.<br>Shop. Connect.</h1>
+        <p>
+          A modern marketplace where customers discover products
+          and every seller can build their own professional shop.
+        </p>
+        <button class="hero-btn" onclick="scrollToSection('products')">
+          Explore Products
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CATEGORIES -->
+  <section class="section" id="categories">
+    <div class="section-title">
+      <h2>Categories</h2>
+      <span class="view">Explore all</span>
+    </div>
+
+    <div class="categories">
+      <div class="category"><div class="icon">📱</div><b>Electronics</b></div>
+      <div class="category"><div class="icon">👕</div><b>Fashion</b></div>
+      <div class="category"><div class="icon">🏠</div><b>Home</b></div>
+      <div class="category"><div class="icon">💄</div><b>Beauty</b></div>
+      <div class="category"><div class="icon">🧸</div><b>Kids</b></div>
+      <div class="category"><div class="icon">⚽</div><b>Sports</b></div>
+    </div>
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <section class="section" id="products">
+    <div class="section-title">
+      <h2>Featured Products</h2>
+      <span class="view">View all</span>
+    </div>
+
+    <div class="products" id="productGrid">
+
+      <div class="product" data-name="Smart Watch">
+        <div class="product-image">⌚</div>
+        <div class="product-info">
+          <div class="product-name">Smart Watch</div>
+          <div class="shop-name">Tech Store</div>
+          <div class="price">Rs. 4,999</div>
+          <button class="add-cart" onclick="addToCart('Smart Watch',4999)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="product" data-name="Premium Shoes">
+        <div class="product-image">👟</div>
+        <div class="product-info">
+          <div class="product-name">Premium Shoes</div>
+          <div class="shop-name">Urban Store</div>
+          <div class="price">Rs. 5,500</div>
+          <button class="add-cart" onclick="addToCart('Premium Shoes',5500)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="product" data-name="Wireless Headphones">
+        <div class="product-image">🎧</div>
+        <div class="product-info">
+          <div class="product-name">Wireless Headphones</div>
+          <div class="shop-name">Sound Hub</div>
+          <div class="price">Rs. 6,999</div>
+          <button class="add-cart" onclick="addToCart('Wireless Headphones',6999)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="product" data-name="Leather Bag">
+        <div class="product-image">👜</div>
+        <div class="product-info">
+          <div class="product-name">Leather Bag</div>
+          <div class="shop-name">Style House</div>
+          <div class="price">Rs. 3,999</div>
+          <button class="add-cart" onclick="addToCart('Leather Bag',3999)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SHOPS -->
+  <section class="section" id="shops">
+    <div class="section-title">
+      <h2>Featured Shops</h2>
+      <span class="view">All Shops</span>
+    </div>
+
+    <div class="shops">
+
+      <div class="shop-card">
+        <div class="shop-logo">TS</div>
+        <div>
+          <h3>Tech Store</h3>
+          <p>Electronics & accessories</p>
+          <button onclick="openShop('Tech Store')">Visit Shop</button>
+        </div>
+      </div>
+
+      <div class="shop-card">
+        <div class="shop-logo">US</div>
+        <div>
+          <h3>Urban Store</h3>
+          <p>Fashion & lifestyle</p>
+          <button onclick="openShop('Urban Store')">Visit Shop</button>
+        </div>
+      </div>
+
+      <div class="shop-card">
+        <div class="shop-logo">SH</div>
+        <div>
+          <h3>Style House</h3>
+          <p>Fashion & accessories</p>
+          <button onclick="openShop('Style House')">Visit Shop</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SELLER -->
+  <section class="section" id="seller">
+    <div class="seller-panel">
+
+      <div>
+        <h2>Grow Your Shop with TURAVOZ</h2>
+        <p>
+          Create your own professional shop, add products,
+          communicate with TURAVOZ and manage your marketplace presence.
+        </p>
+      </div>
+
+      <div class="seller-buttons">
+        <button class="seller-btn" onclick="sellerRegister()">
+          Become a Seller
+        </button>
+
+        <button class="seller-btn dark" onclick="openMessages()">
+          💬 Contact TURAVOZ
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SELLER GROUP -->
+  <section class="section">
+    <div class="group">
+
+      <div class="group-head">
+        <div class="group-icon">👥</div>
+
+        <div>
+          <h2>TURAVOZ Sellers Group</h2>
+          <p>
+            Approved sellers can communicate with TURAVOZ
+            and receive important announcements.
+          </p>
+        </div>
+      </div>
+
+      <div class="seller-list">
+        <span class="seller-pill">Tech Store</span>
+        <span class="seller-pill">Urban Store</span>
+        <span class="seller-pill">Style House</span>
+        <span class="seller-pill">New Sellers</span>
+      </div>
+
+      <br>
+
+      <button class="seller-btn" onclick="openMessages()">
+        Open Seller Communication
+      </button>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="footer-grid">
+
+    <div>
+      <h3>TURAVOZ</h3>
+      <p>
+        A modern marketplace connecting customers
+        with independent sellers and shops.
+      </p>
+    </div>
+
+    <div>
+      <h3>Marketplace</h3>
+      <ul>
+        <li>Products</li>
+        <li>Shops</li>
+        <li>Categories</li>
+        <li>Orders</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Seller</h3>
+      <ul>
+        <li>Become a Seller</li>
+        <li>Seller Shop</li>
+        <li>Seller Messages</li>
+        <li>Sellers Group</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Support</h3>
+      <ul>
+        <li>Contact TURAVOZ</li>
+        <li>Help Center</li>
+        <li>Privacy</li>
+        <li>Terms</li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+
+<script>
+
+  let cart = JSON.parse(localStorage.getItem("turavozCart")) || [];
+
+  updateCartCount();
+
+
+  function addToCart(name, price) {
+
+    cart.push({
+      name: name,
+      price: price
+    });
+
+    localStorage.setItem("turavozCart", JSON.stringify(cart));
+
+    updateCartCount();
+
+    alert(name + " added to cart!");
+  }
+
+
+  function updateCartCount() {
+    document.getElementById("cartCount").innerText = cart.length;
+  }
+
+
+  function openCart() {
+    alert(
+      "TURAVOZ CART\n\n" +
+      "Items in cart: " + cart.length +
+      "\n\nCart page will be connected in the next file."
+    );
+  }
+
+
+  function openAccount() {
+    alert(
+      "TURAVOZ ACCOUNT\n\n" +
+      "Login / Signup / Orders / Seller Account\n\n" +
+      "Account page will be connected next."
+    );
+  }
+
+
+  function openMessages() {
+    alert(
+      "TURAVOZ MESSAGES\n\n" +
+      "Seller → TURAVOZ communication\n" +
+      "Sellers Group\n" +
+      "Admin announcements\n\n" +
+      "Realtime messaging will be connected with the backend."
+    );
+  }
+
+
+  function sellerRegister() {
+    alert(
+      "BECOME A SELLER\n\n" +
+      "Seller registration page will be connected next."
+    );
+  }
+
+
+  function openShop(shopName) {
+    alert(
+      shopName +
+      "\n\nThis seller will have a separate professional shop page."
+    );
+  }
+
+
+  function scrollToSection(id) {
+    const section = document.getElementById(id);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  }
+
+
+  function searchProducts() {
+
+    const query =
+      document.getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+    const products =
+      document.querySelectorAll(".product");
+
+    products.forEach(product => {
+
+      const name =
+        product.dataset.name.toLowerCase();
+
+      product.style.display =
+        name.includes(query)
+        ? "block"
+        : "none";
+
+    });
+  }
+
+</script>
+
+</body>
+</html>
